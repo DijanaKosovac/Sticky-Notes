@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    background-repeat: no-repeat;
+}
+
+.btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.btn-wrap .btn {
+    position: relative;
+    width: 220px;
+    font-size: 1rem;
+    color: #15f4ee;
+    font-weight: 400;
+    border: 5px solid #15f4ee;
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.btn-wrap .btn:hover {
+    box-shadow: 0 5px 50px 0 #15f4ee inset, 0 5px 50px 0 #15f4ee, 0 5px 50px 0 #15f4ee inset, 0 5px 50px 0 #15f4ee;
+    text-shadow: 0 0 5px #15f4ee, 0 0 5px #15f4ee;
+    color: white;
+}
+#test {
+    width: 250px;
+    height: 250px;
+}
+
+#exampleModal {
+    color: #fff;
+    font-weight: 700;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
+}
+.modal-content:before {
+    content: "";
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+.modal-content:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+    pointer-events: none;
+    z-index: -99;
+    animation: animate 10s linear infinite;
+}
+
+.form-control {
+    background: transparent;
+}
+
+.form-control:focus {
+    background: transparent;
+    color: white;
+}
+
+@keyframes animate {
+    0% {
+        filter: blur(60px) hue-rotate(0deg);
+    }
+    100% {
+        filter: blur(60px) hue-rotate(360deg);
+    }
+}
+
+#row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+#note {
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    position: relative;
+}
+
+#note:before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    z-index: -1;
+}
+
+#note:after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    z-index: -2;
+    filter: blur(40px);
+}
+
+#note:before,
+#note:after {
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+}
+
+.fa {
+    float: right;
+    margin: 1rem;
+}
+
+#alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #15f4ee;
+    text-align: center;
+}
