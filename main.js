@@ -50,6 +50,7 @@ row.addEventListener('click', event => {
     if (event.target.classList.contains('delete')) {
         const itemKey = event.target.parentElement.dataset.key;
         deleteTodo(itemKey);
+        Store.removeBook(itemKey);
     }
 });
 
@@ -57,24 +58,45 @@ function deleteTodo(key) {
     todoItems = todoItems.filter(item => item.id !== Number(key));
     const item = document.querySelector(`[data-key='${key}']`);
     item.remove();
-    localStorage.setItem('notes', JSON.stringify(todoItems));
 }
 
 
 class Store {
     static getNotes() {
-        let notes = JSON.parse(localStorage.getItem('notes')) || [];
-        notes.map(data => {
-            renderTodo(data)
-        })
+        let notes;
+        if (localStorage.getItem('notes') === null) {
+            notes = [];
+        } else {
+            notes = JSON.parse(localStorage.getItem('notes'));
+        }
         return notes;
     }
+
     static addNotes(note) {
         const notes = Store.getNotes();
         notes.push(note);
         localStorage.setItem('notes', JSON.stringify(notes));
     }
+
+    static removeBook(id) {
+        let notes = Store.getNotes();
+        notes.map((note, index) => {
+            if (note.id == id) {
+                notes.splice(index, 1)
+            }
+        })
+
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
+
 }
 
-document.addEventListener('DOMContentLoaded', Store.getNotes());
+function getNotesUI() {
+    let notes = JSON.parse(localStorage.getItem('notes')) || [];
+    notes.map(data => {
+        renderTodo(data)
+    })
+}
+
+document.addEventListener('DOMContentLoaded', getNotesUI());
 

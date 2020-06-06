@@ -147,4 +147,5 @@ body {
     transform: translate(-50%, -50%);
     color: #15f4ee;
     text-align: center;
+    display: none;
 }
