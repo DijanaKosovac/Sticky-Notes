@@ -2,7 +2,6 @@ let button = document.querySelector('.btn');
 let form = document.getElementById('form');
 let task = document.getElementById('task');
 let colorpicker = document.getElementById('favcolor');
-let title = document.getElementById('title');
 let test = document.getElementById('test');
 let row = document.getElementById('row');
 let error_msg = document.getElementById('error-msg');
@@ -10,41 +9,58 @@ let alert = document.getElementById('alert');
 
 let todoItems = [];
 
-function addNote(title, text, color) {
+function addNote(text, color) {
     const todo = {
-        title,
         text,
         id: Date.now(),
         color
     };
     todoItems.push(todo);
     Store.addNotes(todo);
-    renderTodo(todo);
+    displayToDo(todo);
 }
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     let taskValue = task.value;
     let colorValue = colorpicker.value;
-    let titleValue = title.value;
     if (taskValue == '') {
         error_msg.innerText = 'This field is required!';
         error_msg.style.color = 'red';
         task.style.border = '2px solid red';
     } else {
-        addNote(titleValue, taskValue, colorValue);
+        addNote(taskValue, colorValue);
         $('#exampleModal').modal('hide');
     }
     task.value = '';
-    title.value = '';
 })
 
-function renderTodo(todo) {
+function displayToDo(todo) {
     row.insertAdjacentHTML('beforeend', `
-     <div id='note' data-key="${todo.id}" style="background: ${todo.color};"><i class="fa fa-times-circle-o delete" style="font-size: 25px"></i><br><h2>Title: #${todo.title}</h2><p>${todo.text}</p></div>
+     <div id='note' data-key="${todo.id}" style="background: ${todo.color};"><i class="fa fa-times-circle-o delete" style="font-size: 20px"></i><i class="fa fa-edit edit" style='font-size: 20px'></i><p id='to-do' style='text-align:center; margin-top: 4rem'>${todo.text}</p></div>
     `);
 }
 
+// Edit
+row.addEventListener('click', event => {
+    if (event.target.classList.contains('edit')) {
+        $('#exampleModal').modal('show');
+        const itemKey = event.target.parentElement.dataset.key;
+        // editNote(itemKey);
+        let toDo = document.getElementById('to-do');
+        let note = document.getElementById('note');
+        task.value = toDo.innerHTML;
+        var theCSSprop = window.getComputedStyle(note, null).getPropertyValue("background");
+        colorpicker.innerHTML = theCSSprop;
+
+    }
+});
+
+function editNote(key) {
+    todoItems = todoItems.filter(item => item.id !== Number(key));
+    const item = document.querySelector(`[data-key='${key}']`);
+}
+// End of Edit
 
 row.addEventListener('click', event => {
     if (event.target.classList.contains('delete')) {
@@ -94,7 +110,7 @@ class Store {
 function getNotesUI() {
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
     notes.map(data => {
-        renderTodo(data)
+        displayToDo(data)
     })
 }
 

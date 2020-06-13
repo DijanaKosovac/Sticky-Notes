@@ -8,8 +8,7 @@
 body {
     height: 100vh;
     background-color: #485461;
-    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
-    background-repeat: no-repeat;
+    background: #28313b;
 }
 
 .btn-wrap {
@@ -45,6 +44,7 @@ body {
 #exampleModal {
     color: #fff;
     font-weight: 700;
+    background: black;
 }
 
 .modal-content {
@@ -100,13 +100,14 @@ body {
     height: 250px;
     margin: 10px;
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     font-family: "Reenie Beanie", cursive;
     font-weight: 500;
     border: none;
     outline: none;
     position: relative;
+    word-wrap: break-word;
 }
 
 #note:before {
